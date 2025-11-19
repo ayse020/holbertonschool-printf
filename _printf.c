@@ -3,16 +3,16 @@
 
 /**
  * handle_d_i - Handles %d and %i conversion specifiers
- * @num: integer to print
+ * @num: integer to print (can be int or long)
  *
  * Return: number of characters printed
  */
-int handle_d_i(int num)
+int handle_d_i(long num)
 {
-    char buffer[12];
+    char buffer[21]; /* Enough for -9223372036854775808 */
     int i = 0;
     int count = 0;
-    unsigned int n;
+    unsigned long n;
     
     /* Handle zero separately */
     if (num == 0)
