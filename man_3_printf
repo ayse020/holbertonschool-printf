@@ -1,0 +1,124 @@
+.TH _PRINTF 3 "2024-11-19" "Holberton School" "Custom Printf Manual"
+.SH NAME
+_printf \- custom implementation of the printf function
+.SH SYNOPSIS
+.nf
+.B #include "main.h"
+.PP
+.BI "int _printf(const char *" format ", ...);"
+.fi
+.SH DESCRIPTION
+The
+.B _printf
+function produces output according to a
+.I format
+as described below.
+This function writes output to stdout, the standard output stream.
+.PP
+The
+.I format
+string is a character string, beginning and ending in its initial shift state, if any. 
+The format string is composed of zero or more directives: ordinary characters (not
+.BR % ),
+which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.
+.PP
+Each conversion specification is introduced by the character
+.BR % ,
+and ends with a conversion specifier. In between there may be (in this order):
+.IP \(bu 3
+Zero or more flags (currently not implemented)
+.IP \(bu 3
+An optional field width (currently not implemented)
+.IP \(bu 3
+An optional precision (currently not implemented)
+.IP \(bu 3
+An optional length modifier (currently not implemented)
+.IP \(bu 3
+A conversion specifier
+.PP
+The conversion specifiers and their meanings are:
+.TP
+.B d, i
+The
+.BR int
+argument is converted to signed decimal notation.
+.TP
+.B c
+The
+.BR int
+argument is converted to an unsigned char, and the resulting character is written.
+.TP
+.B s
+The
+.BR char *
+argument is expected to be a pointer to an array of character type (pointer to a string). 
+Characters from the array are written up to (but not including) a terminating null byte ('\e0').
+If the pointer is NULL, the string "(null)" is printed.
+.TP
+.B %
+A '%' is written. No argument is converted. The complete conversion specification is '%%'.
+.SH RETURN VALUE
+Upon successful return, the
+.B _printf
+function returns the number of characters printed (excluding the null byte used to end output to strings).
+.PP
+If an output error is encountered, a negative value is returned.
+.SH EXAMPLES
+The following example demonstrates the use of
+.BR _printf :
+.PP
+.in +4n
+.EX
+#include "main.h"
+
+int main(void)
+{
+    int count;
+    
+    count = _printf("Hello, %s!\\n", "World");
+    _printf("Printed %d characters\\n", count);
+    
+    _printf("Number: %d, Negative: %i\\n", 42, -42);
+    _printf("Character: %c\\n", 'A');
+    _printf("Percent sign: %%\\n");
+    
+    return (0);
+}
+.EE
+.in
+.PP
+This program will output:
+.PP
+.in +4n
+.EX
+Hello, World!
+Printed 13 characters
+Number: 42, Negative: -42
+Character: A
+Percent sign: %
+.EE
+.in
+.SH CONFORMING TO
+This custom implementation is designed for educational purposes and is not intended to be fully compatible with any specific standard.
+.SH BUGS
+This implementation does not support:
+.IP \(bu 3
+Flag characters (#, 0, -, +, space)
+.IP \(bu 3
+Field width specification
+.IP \(bu 3
+Precision specification
+.IP \(bu 3
+Length modifiers (h, l, L)
+.IP \(bu 3
+Floating-point conversions (f, F, e, E, g, G, a, A)
+.IP \(bu 3
+Other conversion specifiers (u, o, x, X, p, n)
+.PP
+Report bugs to the Holberton School printf project maintainers.
+.SH SEE ALSO
+.BR printf (3),
+.BR putchar (3),
+.BR puts (3)
+.SH AUTHORS
+Developed by Ayse for Holberton School printf project.
