@@ -5,5 +5,6 @@
 
 int _printf(const char *format, ...);
 int _putchar(char c);
+int handle_d_i(int num);
 
 #endif
